@@ -23,4 +23,15 @@ jobs:                                      # when someone edit code
     - name: Build with Maven               # 4. Borrow Maven and run mvn package
       run: mvn -B package --file pom.xml
 
+    - name: Distribute jar-war file # Gửi file .jar .war đi đâu, CD nhảy vào ...
+      run: mkdir staging && cp target/*.jar staging # create folder staging contains file .jar .war after build      
+     
+    - name: Make hyperlink to jar-war file # Create hyperlink to download build 
+      uses: actions/upload-artifact@v1
+      with:
+        name: DOWNLOAD-JAR-HERE   # this is the link point to file .jar .war 
+        path: staging             # if BUILT successfully
+
+
+
    
