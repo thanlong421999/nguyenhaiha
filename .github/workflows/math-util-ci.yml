@@ -1,0 +1,26 @@
+name: Math Utility Repo using Applying CI # The way setting name for all below commands
+                                          # The name of the to-do list
+                                          # push code, fix code 
+on:
+  push:                                  
+    branches: [ "main" ]                  
+  pull_request:
+    branches: [ "main" ]
+
+jobs:                                      # when someone edit code                                     
+  build:                                   # build app
+
+    runs-on: ubuntu-latest                 # 1. Borrow server in the US, install Ubuntu
+
+    steps:
+    - uses: actions/checkout@v3            # 2. Download code to borro-server
+    - name: Set up JDK 17                  # 3. Install JDK on borrow-server
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven               # 4. Borrow Maven and run mvn package
+      run: mvn -B package --file pom.xml
+
+   
